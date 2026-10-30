@@ -1,0 +1,7 @@
+name = "dev-iptv"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[[kv_namespaces]]
+binding = "DISPOSITIVOS"
+id = "PEGA_AQUI_EL_ID_QUE_TE_DA_WRANGLER"

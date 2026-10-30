@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEV-IPTV</title>
+<style>
+  body{background:#000;color:#fff;font-family:'Segoe UI',sans-serif;
+       display:flex;align-items:center;justify-content:center;
+       height:100vh;text-align:center}
+  .box{border:1px solid rgba(0,255,255,.3);padding:30px;border-radius:20px;
+       background:rgba(15,23,42,.6)}
+  h2{color:#00f7ff;text-shadow:0 0 10px #00f7ff;margin-bottom:15px}
+  code{display:block;margin-top:15px;color:#00f7ff;font-size:18px}
+</style>
+</head>
+<body>
+<div class="box" id="msg">Verificando equipo...</div>
+<script>
+let id = localStorage.getItem('dev_id');
+if (!id) { id = crypto.randomUUID(); localStorage.setItem('dev_id', id); }
+
+fetch('/api/auth?id=' + encodeURIComponent(id))
+  .then(r => r.json())
+  .then(d => {
+    if (d.ok) location.href = '/menu';
+    else document.getElementById('msg').innerHTML =
+      '<h2>Equipo no autorizado</h2>Envía este código al administrador:<code>' + id + '</code>';
+  })
+  .catch(() => document.getElementById('msg').textContent = 'Error de conexión');
+</script>
+</body>
+</html>
